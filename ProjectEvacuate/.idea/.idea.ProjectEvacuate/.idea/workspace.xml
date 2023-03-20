@@ -7,10 +7,11 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5456DBFE-CCF6-44F7-AB5B-4D4A01CCF33E/0e/05d114a8/AssetDatabase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D87DA959-C264-43E0-BAA9-578975AFED03/d2/c79ba133/Texture2D.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D87DA959-C264-43E0-BAA9-578975AFED03/34/f1c788c8/Texture.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/AutoMove.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
@@ -20,11 +21,15 @@
       <option value="$PROJECT_DIR$/Assets/Editor/AStarMapEditor/MapMgr.cs" />
       <option value="$PROJECT_DIR$/Assets/Editor/AStarMapEditor/BlockData.cs" />
       <option value="$PROJECT_DIR$/Assets/Editor/AStarMapEditor/AStarMapEditor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/MapMgr.cs" />
       <option value="$PROJECT_DIR$/Assets/Editor/AStarMapEditor/RoadEditor.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/MapNode.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/AStarPathfinding.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/AutoMove.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/MapMgr.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="2NBhQHRLU57bmV9hbWkmRBwVo3s" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -78,6 +83,8 @@
       <workItem from="1679157601923" duration="148000" />
       <workItem from="1679158012419" duration="969000" />
       <workItem from="1679159121882" duration="1389000" />
+      <workItem from="1679284702431" duration="4000" />
+      <workItem from="1679284778609" duration="14498000" />
     </task>
     <servers />
   </component>
@@ -86,26 +93,19 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/MapMgr.cs</url>
-          <line>28</line>
-          <properties documentPath="C:\MyProjects\ProjectEvacuate\ProjectEvacuate\Assets\Scripts\MapMgr.cs" initialLine="28" containingFunctionPresentation="method 'initMap'">
-            <startOffsets>
-              <option value="530" />
-            </startOffsets>
-            <endOffsets>
-              <option value="554" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
