@@ -18,6 +18,8 @@ public class MapMgr : MonoBehaviour
 
     private bool[,] isGoMapData;
 
+    private MapNode[,] _mapNodes;
+
     private static MapMgr _mapInstance;
     // 静态实例
     public static MapMgr MapInstance{
@@ -25,7 +27,7 @@ public class MapMgr : MonoBehaviour
         {
             if (_mapInstance == null)
             {
-                // 在场景中查找GlobalScript实例
+                /*// 在场景中查找GlobalScript实例
                 _mapInstance = FindObjectOfType<MapMgr>();
 
                 // 如果没有找到，创建一个新的游戏对象并添加MapMgr组件
@@ -33,7 +35,8 @@ public class MapMgr : MonoBehaviour
                 {
                     GameObject globalObject = new GameObject("MapMgr");
                     _mapInstance = globalObject.AddComponent<MapMgr>();
-                }
+                }*/
+                throw new Exception("在没有MapMgr结点的情况下试图获取地图信息");
             }
             return _mapInstance;
         }
@@ -44,9 +47,9 @@ public class MapMgr : MonoBehaviour
     public void Awake()
     {
         // 确保只有一个实例存在
-        if (MapInstance == null)
+        if (_mapInstance == null)
         {
-            MapInstance = this;
+            _mapInstance = this;
             DontDestroyOnLoad(gameObject); // 使实例在加载新场景时不被销毁
         }
         else
@@ -66,6 +69,7 @@ public class MapMgr : MonoBehaviour
         mapX = mapTexture.width;
         mapZ = mapTexture.height;
         isGoMapData = new bool[mapX,mapZ];
+        _mapNodes = new MapNode[mapX, mapZ];
 
         if (mapTexture)
         {
@@ -94,6 +98,7 @@ public class MapMgr : MonoBehaviour
                         block.GetComponent<MeshRenderer>().enabled = false;
                     }
 
+                    _mapNodes[j,i] = new MapNode((rawData[i * mapX + j] != 0), j, i);
                     pos.x += blockSize;
                 }
 
@@ -107,9 +112,24 @@ public class MapMgr : MonoBehaviour
         //Texture2D mapTexture = Resources.Load("Image/board") as Texture2D;
     }
 
+    // 根据世界坐标获取对应的地图格子
     public MapNode getMapNodeByWorldPosition(Vector3 worldPos)
     {
-        MapNode x = null;
-        return x;
+        // 将世界坐标转移到MapMgr的子空间坐标系下
+        Vector3 objectPos = gameObject.transform.InverseTransformPoint(worldPos);
+        // 计算得出对应的x,y
+        int girdX = (int)Math.Floor(objectPos.x / blockSize);
+        int girdY = (int)Math.Floor(objectPos.z / blockSize);
+
+        return MapInstance.getMapNodeByXY(girdX,girdY);
+    }
+
+    public MapNode getMapNodeByXY(int girdX, int girdY)
+    {
+        if (girdX >= this.mapX || girdY >= this.mapZ)
+        {
+            throw new Exception("试图计算地图范围外的结点");
+        }
+        return _mapNodes[girdX,girdY];
     }
 }

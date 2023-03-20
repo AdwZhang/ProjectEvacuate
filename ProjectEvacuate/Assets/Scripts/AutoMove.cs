@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AutoMove : MonoBehaviour
 {
-    public MapNode targetNode;
+    private MapNode targetNode;
+    private MapNode beginNode;
     
     // Start is called before the first frame update
     void Start()
@@ -16,9 +17,19 @@ public class AutoMove : MonoBehaviour
         }
         else
         {
-            Vector3 targetPos = parentTransform.position;
+            PlayerParent playerParent = parentTransform.GetComponent<PlayerParent>();
+            GameObject targetObject = playerParent.targetObject;
+            Vector3 targetPos = targetObject.transform.TransformPoint(Vector3.zero);
             targetNode = MapMgr.MapInstance.getMapNodeByWorldPosition(targetPos);
+            Debug.Log(targetNode.gridX);
+            Debug.Log(targetNode.gridY);
+            targetNode.Print();
         }
+
+        beginNode = MapMgr.MapInstance.getMapNodeByXY(0, 0);
+        
+        // 测试寻路
+        
     }
 
     // Update is called once per frame

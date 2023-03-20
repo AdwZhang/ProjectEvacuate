@@ -1,3 +1,6 @@
+using System;
+using UnityEngine;
+
 public class MapNode
 {
     public int gridX;
@@ -17,5 +20,10 @@ public class MapNode
     public int FCost
     {
         get { return gCost + hCost; }
+    }
+
+    public void Print()
+    {
+        Debug.Log(String.Concat("x:",gridX.ToString()," y:",gridY.ToString()));
     }
 }
