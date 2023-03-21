@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class MapNode
 {
@@ -22,8 +23,18 @@ public class MapNode
         get { return gCost + hCost; }
     }
 
+    public List<MapNode> GetNeighbors()
+    {
+        return MapMgr.MapInstance.GetNeighbors(this);
+    }
+
     public void Print()
     {
-        Debug.Log(String.Concat("x:",gridX.ToString()," y:",gridY.ToString()));
+        Debug.Log(String.Concat("x:", gridX.ToString(), " y:", gridY.ToString()));
+    }
+
+    public Vector3 getMapNodeWorldPosition()
+    {
+        return MapMgr.MapInstance.getMapNodeWorldPosition(this);
     }
 }

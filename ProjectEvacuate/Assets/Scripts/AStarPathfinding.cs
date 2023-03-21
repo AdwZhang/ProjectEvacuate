@@ -86,7 +86,7 @@ public class AStarPathfinding : MonoBehaviour
     {
         // 此处需实现一个返回节点邻居的函数，需要根据你的地图和节点结构进行实现。
         // 示例：
-        // return grid.GetNeighbors(node);
-        throw new System.NotImplementedException();
+        return node.GetNeighbors();
+        //throw new System.NotImplementedException();
     }
 }

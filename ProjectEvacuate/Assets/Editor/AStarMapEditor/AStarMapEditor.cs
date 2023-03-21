@@ -8,7 +8,7 @@ public class AStarEditor : EditorWindow
 {
     private int mapX = 10;
     private int mapZ = 10;
-    private int blockSize = 1;
+    private float blockSize = 0.5f;
     private int blockHeight = 1;
     public GameObject root;
     
@@ -28,7 +28,9 @@ public class AStarEditor : EditorWindow
         this.mapZ = Convert.ToInt32(GUILayout.TextField(this.mapZ.ToString()));
         
         GUILayout.Label("地图块大小");
-        this.blockSize = Convert.ToInt32(GUILayout.TextField(this.blockSize.ToString()));
+        string input = GUILayout.TextField(blockSize.ToString());
+        float.TryParse(input, out this.blockSize);
+        //this.blockSize = (float)Convert.ToDouble(GUILayout.TextField(this.blockSize.ToString()));
         
         GUILayout.Label("地图块高度");
         this.blockHeight = Convert.ToInt32(GUILayout.TextField(this.blockHeight.ToString()));

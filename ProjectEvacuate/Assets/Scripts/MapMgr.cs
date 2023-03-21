@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class MapMgr : MonoBehaviour
+public class MapMgr : AStarPathfinding
 {
     public int mapX;
     
@@ -73,8 +73,10 @@ public class MapMgr : MonoBehaviour
 
         if (mapTexture)
         {
+            RemoveAllChildren();
             GameObject cubePrefab =
-                AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Editor/AStarMapEditor/Prefabs/block.prefab");
+                AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Editor/AStarMapEditor/Prefabs/blockNoCollider.prefab");
+                //AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Editor/AStarMapEditor/Prefabs/block.prefab");
             byte[] rawData = mapTexture.GetRawTextureData();
             Vector3 startPos = new Vector3(blockSize * 0.5f, blockHeight * 0.5f, blockSize * 0.5f);
             Vector3 pos = startPos;
@@ -112,6 +114,16 @@ public class MapMgr : MonoBehaviour
         //Texture2D mapTexture = Resources.Load("Image/board") as Texture2D;
     }
 
+    public Vector3 getMapNodeWorldPosition(MapNode node)
+    {
+        Vector3 pos = new Vector3();
+        pos.x = blockSize * (node.gridX + 0.5f);
+        pos.y = blockSize * 0.5f;
+        pos.z = blockSize * (node.gridY + 0.5f);
+        Vector3 worldPos = gameObject.transform.TransformPoint(pos);
+        return worldPos;
+    }
+    
     // 根据世界坐标获取对应的地图格子
     public MapNode getMapNodeByWorldPosition(Vector3 worldPos)
     {
@@ -132,4 +144,43 @@ public class MapMgr : MonoBehaviour
         }
         return _mapNodes[girdX,girdY];
     }
+    
+    public List<MapNode> GetNeighbors(MapNode node)
+    {
+        List<MapNode> nodeList = new List<MapNode>();
+
+        for (int i = node.gridX - 1; i <= node.gridX + 1; i++)
+        {
+            if (i >= this.mapX || i < 0)
+            {
+                continue;
+            }
+            for (int j = node.gridY - 1; j <= node.gridY + 1; j++)
+            {
+                if (j >= this.mapZ || j < 0)
+                {
+                    continue;
+                }
+
+                MapNode neighbor = this.getMapNodeByXY(i, j);
+                if (neighbor.walkable)
+                {
+                    nodeList.Add(neighbor);
+                }
+            }
+        }
+
+        return nodeList;
+    }
+
+    // 调用这个方法以删除所有子节点
+    public void RemoveAllChildren()
+    {
+        foreach (Transform child in transform)
+        {
+            // 销毁子节点
+            Destroy(child.gameObject);
+        }
+    }
+
 }
