@@ -46,9 +46,10 @@ public class AStarEditor : EditorWindow
             GUILayout.Label("当前没有选中的UI节点，无法生成");
         }
 
-        this.addCreateMapBtn();
-        this.addResetBtn();
-        this.addClearBtn();
+        addCreateMapBtn();
+        addResetBtn();
+        addOneKeyGoBtn();
+        addClearBtn();
     }
     
     // ------------------------------- 按钮回调 ------------------------------
@@ -85,6 +86,21 @@ public class AStarEditor : EditorWindow
             }
         }
     }
+    
+    // 添加重置地图块按钮
+    private void addOneKeyGoBtn()
+    {
+        if (GUILayout.Button("地图一键可通行"))
+        {
+            if (Selection.activeGameObject != null)
+            {
+                Debug.Log("开始重置");
+                this.ResetBlocksGo();
+                Debug.Log("重置结束");
+            }
+        }
+    }
+    
     
     // 清空地图块按钮
     private void addClearBtn()
@@ -141,7 +157,7 @@ public class AStarEditor : EditorWindow
         }
     }
 
-    // 重置地图块
+    // 地图一键不可通行
     private void ResetBlocks()
     {
         int count = this.root.transform.childCount;
@@ -149,6 +165,19 @@ public class AStarEditor : EditorWindow
         {
             GameObject cube = this.root.transform.GetChild(i).gameObject;
             cube.GetComponent<BlockData>().isGo = 0;
+            cube.GetComponent<MeshRenderer>().enabled = true;
+        }
+    }
+    
+    // 地图一键可通行
+    private void ResetBlocksGo()
+    {
+        int count = this.root.transform.childCount;
+        for (int i = 0; i < count; i++)
+        {
+            GameObject cube = this.root.transform.GetChild(i).gameObject;
+            cube.GetComponent<BlockData>().isGo = 1;
+            cube.GetComponent<MeshRenderer>().enabled = false;
         }
     }
     
